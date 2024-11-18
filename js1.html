@@ -3,15 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bottoni Stilizzati</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bottoni Stilizzati con Funzioni JS</title>
+    <style>
+        .button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .button1 {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .button1:hover {
+            background-color: #2980b9;
+        }
+
+        .button2 {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .button2:hover {
+            background-color: #27ae60;
+        }
+
+        .button3 {
+            background-color: #e67e22;
+            color: white;
+        }
+
+        .button3:hover {
+            background-color: #d35400;
+        }
+    </style>
 </head>
 <body>
 
-    <button id="button1" class="button-style1">Bottone 1</button>
-    <button id="button2" class="button-style2">Bottone 2</button>
-    <button id="button3" class="button-style3">Bottone 3</button>
+    <h1>Bottoni Stilizzati con JavaScript</h1>
 
-    <script src="script.js"></script>
+    <button class="button button1" onclick="alert1()">Bottone azzuro</button>
+    <button class="button button2" onclick="alert2()">Bottone verde</button>
+    <button class="button button3" onclick="alert3()">Bottone arancione</button>
+
+    <script>
+        function alert1() {
+            alert("Hai cliccato sul Bottone azzuro!");
+        }
+
+        function alert2() {
+            alert("Hai cliccato sul Bottone verde!");
+        }
+
+        function alert3() {
+            alert("Hai cliccato sul Bottone arancione!");
+        }
+    </script>
+    
 </body>
 </html>
