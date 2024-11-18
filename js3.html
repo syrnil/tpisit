@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aforismi di Scienziati</title>
+    <style>
+        .aforisma {
+            margin-bottom: 20px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aforismi di Scienziati</h1>
+
+    <div class="aforisma">
+        <p id="testo1">“Le leggi della scienza dovrebbero essere le stesse per tutti gli osservatori che si muovono liberamente, a prescindere dalla loro velocità.”
+            Stephen Hawking</p>
+        <button onclick="nascondiTesto('testo1')">Nascondi Testo di  Stephen</button>
+    </div>
+
+    <div class="aforisma">
+        <p id="testo2">“Fino a oggi la maggior parte degli scienziati è stata troppo occupata nello sviluppo di nuove teorie che descrivono che cosa sia l'universo per porsi la domanda perché?”
+            Stephen Hawking</p>
+        <button onclick="nascondiTesto('testo2')">Nascondi Testo di Stephen</button>
+    </div>
+
+    <div class="aforisma">
+        <p id="testo3">“Se verrà dimostrato che la mia teoria della relatività è valida, la Germania dirà che sono tedesco e la Francia che sono cittadino del mondo. Se la mia teoria dovesse essere sbagliata, la Francia dirà che sono un tedesco e la Germania che sono un ebreo.”
+            Albert Einstein</p>
+        <button onclick="nascondiTesto('testo3')">Nascondi Testo di Albert</button>
+    </div>
+
+    <div class="aforisma">
+        <p id="testo4">"La natura è un libro aperto, ma per leggerlo bisogna imparare il linguaggio." - Galileo Galilei</p>
+        <button onclick="nascondiTesto('testo4')">Nascondi Testo di Galileo</button>
+    </div>
+
+    <div class="aforisma">
+        <p id="testo5">“Lo scienziato nel suo laboratorio non è solo un tecnico, è anche un bambino davanti a fenomeni della Natura che lo affascinano come un racconto di fate.”
+            Marie Curie</p>
+        <button onclick="nascondiTesto('testo5')">Nascondi Testo di  Marie</button>
+    </div>
+
+    <script>
+        function nascondiTesto(id) {
+            const testo = document.getElementById(id);
+            testo.style.display = "none"; 
+        }
+    </script>
+</body>
+</html>
