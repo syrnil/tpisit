@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekking e Dislivello</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Monviso%2C_Cuneo_%28Italy%29.jpg/1200px-Monviso%2C_Cuneo_%28Italy%29.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Calcola il Dislivello del Trekking</h2>
+
+        <!-- Input per il punto di partenza, pausa, e arrivo -->
+        <label for="partenza">Punto di partenza (m):</label>
+        <input type="number" id="partenza" placeholder="E.g. 1000">
+
+        <label for="pausa">Punto di pausa (m):</label>
+        <input type="number" id="pausa" placeholder="E.g. 1500">
+
+        <label for="arrivo">Punto di arrivo (m):</label>
+        <input type="number" id="arrivo" placeholder="E.g. 2000">
+
+        <!-- Bottone che calcola il dislivello -->
+        <button onclick="calcolaDislivello()">Calcola Dislivello</button>
+
+        <!-- Risultato -->
+        <div class="result" id="dislivello"></div>
+    </div>
+
+    <script>
+        // Funzione per calcolare il dislivello totale
+        function calcolaDislivello() {
+            // Otteniamo i valori inseriti
+            var partenza = parseInt(document.getElementById('partenza').value);
+            var pausa = parseInt(document.getElementById('pausa').value);
+            var arrivo = parseInt(document.getElementById('arrivo').value);
+
+            // Verifica che i dati siano validi
+            if (isNaN(partenza) || isNaN(pausa) || isNaN(arrivo)) {
+                alert("Per favore, inserisci valori validi per tutti i punti.");
+                return;
+            }
+
+            // Calcoliamo il dislivello
+            var dislivelloTotale = Math.abs(arrivo - partenza) + Math.abs(pausa - partenza);
+            
+            // Mostriamo il dislivello totale
+            document.getElementById('dislivello').innerText = "Dislivello totale: " + dislivelloTotale + " metri.";
+        }
+    </script>
+
+</body>
+</html>
