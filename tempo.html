@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizzatore Numeri Casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 34px;
+        }
+        .output {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px;
+            border: 3px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizzatore </h1>
+    <div id="output" class="output"></div>
+
+    <script>
+       
+        function isPrime(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        function generateRandomNumber() {
+            const n = Math.floor(Math.random() * 1000) + 1;
+            let output = `<h2>Numero Generato: ${n}</h2>`;
+
+            output += `<p>${n} è un numero ${n % 2 === 0 ? 'pari' : 'dispari'}</p>`;
+
+           
+            output += `<p>${n} è ${isPrime(n) ? 'un numero primo' : 'non un numero primo'}</p>`;
+
+          
+            output += `<p>Doppio di ${n}: ${n * 2}</p>`;
+            output += `<p>Metà intera di ${n}: ${Math.floor(n / 2)}</p>`;
+
+            
+            output += `<p>Complemento di ${n} a 1000: ${1000 - n}</p>`;
+
+            
+            output += `<p>Somma di ${n} con il precedente (${n - 1}) e il successivo (${n + 1}): ${n + (n - 1) + (n + 1)}</p>`;
+
+            
+            output += `<p>${n} moltiplicato per 3.14: ${(n * 3.14).toFixed(2)}</p>`;
+
+           
+            document.getElementById('output').innerHTML = output;
+        }
+
+     
+        generateRandomNumber();  
+        setInterval(generateRandomNumber, 5000); 
+    </script>
+</body>
