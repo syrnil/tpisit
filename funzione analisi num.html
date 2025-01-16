@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proprietà Numeri da 1 a 10000</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .prime {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Proprietà dei Numeri da 1 a 10000</h1>
+    <table id="number-table">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Pari/Dispari</th>
+                <th>Primo</th>
+                <th>Doppio</th>
+                <th>Metà Intera</th>
+                <th>Complemento (1000-n)</th>
+                <th>Somma con Precedente e Successivo</th>
+                <th>x3.14</th>
+                <th>x2.71</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Le righe saranno aggiunte dinamicamente tramite JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Funzione per verificare se un numero è primo
+        function isPrime(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Funzione per generare e stampare le proprietà dei numeri
+        function generateTable() {
+            const tableBody = document.getElementById('number-table').getElementsByTagName('tbody')[0];
+
+            for (let n = 1; n <= 10000; n++) {
+                // Determinazione se il numero è pari o dispari
+                const parity = (n % 2 === 0) ? 'pari' : 'dispari';
+
+                // Verifica se il numero è primo
+                const prime = isPrime(n) ? 'Sì' : 'No';
+
+                // Doppio e metà intera
+                const double = n * 2;
+                const half = Math.floor(n / 2);
+
+                // Complemento rispetto a 1000
+                const complement = 1000 - n;
+
+                // Somma del numero con il precedente e successivo
+                const sumNeighbors = (n - 1) + n + (n + 1);
+
+                // Moltiplicazione per π e per e
+                const multiplyPi = (n * 3.14).toFixed(2);
+                const multiplyE = (n * 2.71).toFixed(2);
+
+                // Crea una nuova riga della tabella
+                const row = tableBody.insertRow();
+
+                // Aggiungi le celle con i dati
+                row.insertCell(0).textContent = n;
+                row.insertCell(1).textContent = parity;
+                row.insertCell(2).textContent = prime;
+                row.insertCell(3).textContent = double;
+                row.insertCell(4).textContent = half;
+                row.insertCell(5).textContent = complement;
+                row.insertCell(6).textContent = sumNeighbors;
+                row.insertCell(7).textContent = multiplyPi;
+                row.insertCell(8).textContent = multiplyE;
+
+                // Se il numero è primo, coloriamo tutta la riga di rosso
+                if (isPrime(n)) {
+                    row.classList.add('prime');
+                }
+            }
+        }
+
+        // Esegui la generazione della tabella quando la pagina è caricata
+        window.onload = generateTable;
+    </script>
+
+</body>
+</html>
