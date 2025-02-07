@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottoni e Tempi</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Premi uno dei bottoni</h1>
+    
+    <button id="button1">Bottone 1</button>
+    <button id="button2">Bottone 2</button>
+    <button id="button3">Bottone 3</button>
+    <button id="button4">Bottone 4</button>
+
+    <h2>Data e Ora:</h2>
+    <p id="time"></p>
+    
+    <h2>Tempi tra i click:</h2>
+    <ul id="tempi">
+    </ul>
+
+    <script>
+        let firstClickTime = null;
+        let tempi = [];
+
+        function mostraDataOra() {
+            const now = new Date();
+            const formattedTime = now.toLocaleString();
+            document.getElementById('time').innerText = "Data e Ora: " + formattedTime;
+        }
+
+        function calcolaTempoDiferenza() {
+            const now = new Date();
+            if (firstClickTime === null) {
+                firstClickTime = now;
+            } else {
+                const diff = now - firstClickTime;
+                const seconds = (diff / 1000).toFixed(3); // Tempo in secondi, decimi e millesimi
+                tempi.push(seconds);
+
+                const li = document.createElement('li');
+                li.textContent = `Tempo dal primo click: ${seconds} secondi`;
+                document.getElementById('tempi').appendChild(li);
+            }
+        }
+
+        document.getElementById('button1').addEventListener('click', function() {
+            mostraDataOra();
+            calcolaTempoDiferenza();
+        });
+
+        document.getElementById('button2').addEventListener('click', function() {
+            mostraDataOra();
+            calcolaTempoDiferenza();
+        });
+
+        document.getElementById('button3').addEventListener('click', function() {
+            mostraDataOra();
+            calcolaTempoDiferenza();
+        });
+
+        document.getElementById('button4').addEventListener('click', function() {
+            mostraDataOra();
+            calcolaTempoDiferenza();
+        });
+    </script>
+</body>
+</html>
