@@ -1,0 +1,58 @@
+import random
+import time
+import math
+
+# Funzione per verificare se un numero è primo
+def è_primo(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+# Funzione per eseguire le operazioni richieste su un numero
+def operazioni_su_numero(n):
+    # Verifica se il numero è pari o dispari
+    if n % 2 == 0:
+        print(f"{n} è pari.")
+    else:
+        print(f"{n} è dispari.")
+    
+    # Verifica se il numero è primo
+    if è_primo(n):
+        print(f"{n} è un numero primo.")
+    else:
+        print(f"{n} non è un numero primo.")
+    
+    # Calcola il doppio e la metà intera
+    doppio = n * 2
+    meta = n // 2
+    print(f"Doppio di {n}: {doppio}")
+    print(f"Meta di {n}: {meta}")
+    
+    # Calcola il complemento (1000 - n)
+    complemento = 1000 - n
+    print(f"Complemento di {n} (1000 - n): {complemento}")
+    
+    # Somma del numero con il suo precedente e successivo
+    precedente = n - 1
+    successivo = n + 1
+    somma = precedente + n + successivo
+    print(f"Somma del numero con il suo precedente e successivo ({precedente} + {n} + {successivo}): {somma}")
+    
+    # Moltiplicazione del numero per 3.14
+    moltiplicazione = n * 3.14
+    print(f"{n} moltiplicato per 3.14: {moltiplicazione:.2f}")
+    print("-" * 40)
+
+# Funzione per avviare il temporizzatore
+def temporizzatore():
+    while True:
+        numero = random.randint(1, 1000)  # Genera un numero casuale tra 1 e 1000
+        print(f"Numero generato: {numero}")
+        operazioni_su_numero(numero)  # Esegui le operazioni sul numero
+        time.sleep(5)  # Aspetta 5 secondi prima di generare un altro numero
+
+# Avvia il temporizzatore
+temporizzatore()
