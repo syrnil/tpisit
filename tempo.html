@@ -1,58 +1,109 @@
-import random
-import time
-import math
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizzatore con Numero Casuale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .result {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e3e3e3;
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
-# Funzione per verificare se un numero è primo
-def è_primo(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
-    return True
+    <div class="container">
+        <h1>Temporizzatore di Numero Casuale</h1>
+        <div id="output">
+            <p>Attendere 5 secondi per il prossimo numero...</p>
+        </div>
+    </div>
 
-# Funzione per eseguire le operazioni richieste su un numero
-def operazioni_su_numero(n):
-    # Verifica se il numero è pari o dispari
-    if n % 2 == 0:
-        print(f"{n} è pari.")
-    else:
-        print(f"{n} è dispari.")
-    
-    # Verifica se il numero è primo
-    if è_primo(n):
-        print(f"{n} è un numero primo.")
-    else:
-        print(f"{n} non è un numero primo.")
-    
-    # Calcola il doppio e la metà intera
-    doppio = n * 2
-    meta = n // 2
-    print(f"Doppio di {n}: {doppio}")
-    print(f"Meta di {n}: {meta}")
-    
-    # Calcola il complemento (1000 - n)
-    complemento = 1000 - n
-    print(f"Complemento di {n} (1000 - n): {complemento}")
-    
-    # Somma del numero con il suo precedente e successivo
-    precedente = n - 1
-    successivo = n + 1
-    somma = precedente + n + successivo
-    print(f"Somma del numero con il suo precedente e successivo ({precedente} + {n} + {successivo}): {somma}")
-    
-    # Moltiplicazione del numero per 3.14
-    moltiplicazione = n * 3.14
-    print(f"{n} moltiplicato per 3.14: {moltiplicazione:.2f}")
-    print("-" * 40)
+    <script>
+        // Funzione per verificare se un numero è primo
+        function èPrimo(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-# Funzione per avviare il temporizzatore
-def temporizzatore():
-    while True:
-        numero = random.randint(1, 1000)  # Genera un numero casuale tra 1 e 1000
-        print(f"Numero generato: {numero}")
-        operazioni_su_numero(numero)  # Esegui le operazioni sul numero
-        time.sleep(5)  # Aspetta 5 secondi prima di generare un altro numero
+        // Funzione che esegue tutte le operazioni
+        function operazioniSuNumero(n) {
+            let output = '';
 
-# Avvia il temporizzatore
-temporizzatore()
+            // Verifica se il numero è pari o dispari
+            if (n % 2 === 0) {
+                output += `${n} è pari.<br>`;
+            } else {
+                output += `${n} è dispari.<br>`;
+            }
+
+            // Verifica se il numero è primo
+            if (èPrimo(n)) {
+                output += `${n} è un numero primo.<br>`;
+            } else {
+                output += `${n} non è un numero primo.<br>`;
+            }
+
+            // Calcola il doppio e la metà intera
+            let doppio = n * 2;
+            let meta = Math.floor(n / 2);
+            output += `Doppio di ${n}: ${doppio}<br>`;
+            output += `Meta di ${n}: ${meta}<br>`;
+
+            // Calcola il complemento (1000 - n)
+            let complemento = 1000 - n;
+            output += `Complemento di ${n} (1000 - n): ${complemento}<br>`;
+
+            // Somma del numero con il suo precedente e successivo
+            let precedente = n - 1;
+            let successivo = n + 1;
+            let somma = precedente + n + successivo;
+            output += `Somma del numero con il suo precedente e successivo (${precedente} + ${n} + ${successivo}): ${somma}<br>`;
+
+            // Moltiplicazione per 3.14
+            let moltiplicazione = (n * 3.14).toFixed(2);
+            output += `${n} moltiplicato per 3.14: ${moltiplicazione}<br>`;
+
+            // Mostra i risultati nell'elemento output
+            document.getElementById('output').innerHTML = output;
+        }
+
+        // Funzione per generare un numero casuale tra 1 e 1000 e eseguire le operazioni
+        function startTimer() {
+            setInterval(function() {
+                let numero = Math.floor(Math.random() * 1000) + 1; // Numero casuale tra 1 e 1000
+                operazioniSuNumero(numero); // Esegui le operazioni sul numero
+            }, 5000); // Ogni 5 secondi
+        }
+
+        // Avvia il temporizzatore al caricamento della pagina
+        window.onload = function() {
+            startTimer();
+        };
+    </script>
+
+</body>
+</html>
