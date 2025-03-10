@@ -7,31 +7,50 @@
     <!-- Link a Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJf+WcPFGg2DJU/ZI5pNWtGYOvPiYoC5vmlmj2hG8k6Nlpz5UuZrA6XZh5Yb" crossorigin="anonymous">
     <style>
+        body {
+            background-color: black; /* Impostato lo sfondo nero */
+            color: white; /* Colore del testo bianco per contrasto */
+        }
+
         .btn-square {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             font-size: 14px;
-            margin: 10px;
+            margin: 0;
             transition: background-color 0.3s;
         }
+
         .active {
             background-color: #00ff15;
         }
+
         .disabled {
             pointer-events: none;
         }
-        /* Organizzazione della griglia per 4 pulsanti per riga */
+
         .button-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 colonne */
-            gap: 5px; /* Spazio ridotto tra i quadrati */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 2px;
             justify-items: center;
+        }
+
+        .btn-light {
+            background-color: #f0f0f0; /* Colore chiaro per i pulsanti */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Colore blu per il pulsante di inizio gioco */
+        }
+
+        .btn-square.active {
+            background-color: #00ff15; /* Colore verde per il pulsante attivo */
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container text-center mt-5">
-        <h1>gioco del memory</h1>
+        <h1>Gioco del Memory</h1>
         <div class="mt-4">
             <button id="startBtn" class="btn btn-primary">Inizia Gioco</button>
             <p id="gameStatus" class="mt-3"></p>
@@ -88,7 +107,7 @@
         function startGame() {
             if (!isGameActive) {
                 score = 0;
-                document.getElementById("score").innerText = `Punteggio: ${score}`;
+                document.getElementById("score").innerText = "Punteggio: " + score;
                 sequence = [];
                 userSequence = [];
                 isGameActive = true;
@@ -157,7 +176,7 @@
 
             // Se la sequenza è corretta, aumenta il punteggio e passa alla sequenza successiva
             score++;
-            document.getElementById("score").innerText = `Punteggio: ${score}`;
+            document.getElementById("score").innerText = "Punteggio: " + score;
             userSequence = [];
             setTimeout(nextSequence, 1000);
         }
