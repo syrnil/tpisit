@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form di Input</title>
+    <script>
+        // Funzione per calcolare la lunghezza delle stringhe
+        function calcolaLunghezza() {
+            let inputA = document.getElementById("inputA").value;
+            let inputB = document.getElementById("inputB").value;
+            document.getElementById("lunghezzaA").textContent = "Lunghezza di A: " + inputA.length;
+            document.getElementById("lunghezzaB").textContent = "Lunghezza di B: " + inputB.length;
+        }
+
+        // Funzione per restituire la stringa al contrario
+        function stringaAlContrario() {
+            let inputA = document.getElementById("inputA").value;
+            let inputB = document.getElementById("inputB").value;
+            document.getElementById("contrarioA").textContent = "A al contrario: " + inputA.split('').reverse().join('');
+            document.getElementById("contrarioB").textContent = "B al contrario: " + inputB.split('').reverse().join('');
+        }
+
+        // Funzione per unire le due stringhe
+        function unisciStringhe() {
+            let inputA = document.getElementById("inputA").value;
+            let inputB = document.getElementById("inputB").value;
+            document.getElementById("unione").textContent = "Stringhe unite: " + inputA + inputB;
+        }
+
+        // Funzione per calcolare la somma delle lunghezze e segnalare se b è troppo lunga
+        function sommaLunghezze() {
+            let inputA = document.getElementById("inputA").value;
+            let inputB = document.getElementById("inputB").value;
+            let somma = inputA.length + inputB.length;
+            document.getElementById("sommaLunghezze").textContent = "Somma lunghezze: " + somma;
+
+            if (inputB.length > 20) {
+                document.getElementById("avviso").textContent = "B troppo lunga!";
+            } else {
+                document.getElementById("avviso").textContent = "";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Form di Input</h1>
+    <form>
+        <label for="inputA">Stringa A:</label>
+        <input type="text" id="inputA" oninput="calcolaLunghezza(); stringaAlContrario(); unisciStringhe(); sommaLunghezze();">
+        <br><br>
+
+        <label for="inputB">Stringa B:</label>
+        <input type="text" id="inputB" oninput="calcolaLunghezza(); stringaAlContrario(); unisciStringhe(); sommaLunghezze();">
+        <br><br>
+    </form>
+
+    <p id="lunghezzaA">Lunghezza di A: </p>
+    <p id="lunghezzaB">Lunghezza di B: </p>
+    <p id="contrarioA">A al contrario: </p>
+    <p id="contrarioB">B al contrario: </p>
+    <p id="unione">Stringhe unite: </p>
+    <p id="sommaLunghezze">Somma lunghezze: </p>
+    <p id="avviso" style="color:red;"></p>
+</body>
+</html>
