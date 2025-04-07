@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Casuali</title>
+    <style>
+        /* Impostazioni di base */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        /* Div con la stessa dimensione */
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        /* Colore iniziale per il div blu */
+        .blu {
+            background-color: blue;
+        }
+
+        /* Colore iniziale per il div giallo */
+        .gialla {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- I due div che si muoveranno -->
+    <div id="boxBlu" class="box blu"></div>
+    <div id="boxGialla" class="box gialla"></div>
+
+    <script>
+        // Funzione per posizionare un div in modo casuale
+        function posizionaCasualmente(div) {
+            // Posizione casuale per il div
+            let x = Math.random() * (window.innerWidth - 100);  // Spazio per la larghezza del div
+            let y = Math.random() * (window.innerHeight - 100); // Spazio per l'altezza del div
+            div.style.left = x + "px";  // Imposta la posizione orizzontale
+            div.style.top = y + "px";   // Imposta la posizione verticale
+        }
+
+        // Funzione per controllare se i div si sovrappongono
+        function controllaSovrapposizione() {
+            var blu = document.getElementById('boxBlu');
+            var gialla = document.getElementById('boxGialla');
+
+            // Ottieni le posizioni e dimensioni dei div
+            var bluRect = blu.getBoundingClientRect();
+            var giallaRect = gialla.getBoundingClientRect();
+
+            // Controlla se c'è sovrapposizione
+            if (bluRect.right > giallaRect.left && bluRect.left < giallaRect.right && 
+                bluRect.bottom > giallaRect.top && bluRect.top < giallaRect.bottom) {
+                // Se si sovrappongono, colorali di rosso
+                blu.style.backgroundColor = "red";
+                gialla.style.backgroundColor = "red";
+            } else {
+                // Altrimenti, mantieni i colori originali
+                blu.style.backgroundColor = "blue";
+                gialla.style.backgroundColor = "yellow";
+            }
+        }
+
+        // Funzione per spostare i div e controllare la sovrapposizione
+        function muoviEControlla() {
+            posizionaCasualmente(document.getElementById('boxBlu'));  // Sposta il div blu
+            posizionaCasualmente(document.getElementById('boxGialla'));  // Sposta il div giallo
+            controllaSovrapposizione();  // Controlla se si sovrappongono
+        }
+
+        // Esegui il movimento ogni 2 secondi
+        setInterval(muoviEControlla, 2000);
+    </script>
+</body>
+</html>
