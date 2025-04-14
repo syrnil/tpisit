@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeri Casuali con Medie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #output {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generatore di Numeri Casuali (Reali)</h1>
+    <label for="min">Min:</label>
+    <input type="number" id="min" value="1">
+    <label for="max">Max:</label>
+    <input type="number" id="max" value="100">
+    <button onclick="generaNumeri()">Genera</button>
+    <div id="output"></div>
+
+    <script>
+        function generaNumeri() {
+            const min = parseFloat(document.getElementById('min').value);
+            const max = parseFloat(document.getElementById('max').value);
+
+            if (isNaN(min) || isNaN(max) || min >= max) {
+                alert("Inserisci un intervallo valido.");
+                return;
+            }
+
+            const arrayNumeri = [];
+            const arrayMedie = [];
+            const output = document.getElementById('output');
+            output.textContent = "";
+
+            // Generazione di 10.000 numeri reali
+            for (let i = 0; i < 10000; i++) {
+                const num = Math.random() * (max - min) + min;
+                arrayNumeri.push(num);
+            }
+
+            // Elaborazione in blocchi da 50
+            for (let i = 0; i < arrayNumeri.length; i += 50) {
+                const blocco = arrayNumeri.slice(i, i + 50);
+                const media = calcolaMedia(blocco);
+                arrayMedie.push(media);
+
+                const numeriFormattati = blocco.map(n => n.toFixed(2)).join(" ");
+                output.textContent += numeriFormattati + " | Media: " + media.toFixed(2) + "\n";
+            }
+
+            console.log("Array delle medie:", arrayMedie);
+        }
+
+        function calcolaMedia(arr) {
+            const somma = arr.reduce((acc, val) => acc + val, 0);
+            return somma / arr.length;
+        }
+    </script>
+</body>
+</html>
