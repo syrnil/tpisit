@@ -2,73 +2,78 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Movimento Antiorario</title>
+  <title>Quadrato in Movimento Antiorario</title>
   <style>
     #container {
       width: 400px;
       height: 400px;
       border: 2px solid black;
       position: relative;
-      margin: 20px auto;
+      margin: 30px auto;
     }
 
     #square {
       width: 50px;
       height: 50px;
-      background-color: blue;
+      background-color: red;
       position: absolute;
       top: 0;
-      left: 350px; /* Inizia in alto a destra */
+      left: 350px; /* parte in alto a destra */
     }
   </style>
 </head>
 <body>
 
-  <h2 style="text-align:center;">Movimento Antiorario del Quadrato</h2>
+  <h2 style="text-align:center;">Quadrato che si muove (antiorario)</h2>
   <div id="container">
     <div id="square"></div>
   </div>
 
   <script>
     const square = document.getElementById('square');
+    const step = 10;
     const containerSize = 400;
     const squareSize = 50;
-    const step = 10;
 
-    let x = 350; // partenza da destra
+    let x = 350; // inizia in alto a destra
     let y = 0;
     let direction = 'left';
 
     setInterval(() => {
-      if (direction === 'left') {
-        x -= step;
-        if (x <= 0) {
-          x = 0;
-          direction = 'down';
-        }
-      } else if (direction === 'down') {
-        y += step;
-        if (y >= containerSize - squareSize) {
-          y = containerSize - squareSize;
-          direction = 'right';
-        }
-      } else if (direction === 'right') {
-        x += step;
-        if (x >= containerSize - squareSize) {
-          x = containerSize - squareSize;
-          direction = 'up';
-        }
-      } else if (direction === 'up') {
-        y -= step;
-        if (y <= 0) {
-          y = 0;
-          direction = 'left';
-        }
+      switch (direction) {
+        case 'left':
+          x -= step;
+          if (x <= 0) {
+            x = 0;
+            direction = 'down';
+          }
+          break;
+        case 'down':
+          y += step;
+          if (y >= containerSize - squareSize) {
+            y = containerSize - squareSize;
+            direction = 'right';
+          }
+          break;
+        case 'right':
+          x += step;
+          if (x >= containerSize - squareSize) {
+            x = containerSize - squareSize;
+            direction = 'up';
+          }
+          break;
+        case 'up':
+          y -= step;
+          if (y <= 0) {
+            y = 0;
+            direction = 'left';
+          }
+          break;
       }
 
       square.style.left = x + 'px';
       square.style.top = y + 'px';
-    }, 200); // ogni 200ms si muove di 10px
+    }, 200); // ogni 200ms
   </script>
 
 </body>
