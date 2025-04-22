@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Numeri Casuali con Chart.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <canvas id="grafico" width="800" height="400"></canvas>
+
+  <script>
+    const L1 = 0;
+    const L2 = 1;
+    const mediaRange = (L2 - L1) / 2;
+
+    let ArrayNumeriCasuali = [];
+    let ArrayRapporti = [];
+    let ArrayDistanze = [];
+
+    const ctx = document.getElementById('grafico').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Numero Casuale',
+            data: [],
+            borderColor: 'blue',
+            fill: false
+          },
+          {
+            label: 'Distanza da Media',
+            data: [],
+            borderColor: 'red',
+            fill: false
+          },
+          {
+            label: 'Rapporto i/i-1',
+            data: [],
+            borderColor: 'green',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        scales: {
+          y: {
+            min: 0,
+            max: 1.5
+          }
+        }
+      }
+    });
+
+    let counter = 0;
+    setInterval(() => {
+      const nuovoNumero = Math.random(); // float tra 0 e 1
+      ArrayNumeriCasuali.push(nuovoNumero);
+
+      // rapporto con il numero precedente
+      if (ArrayNumeriCasuali.length > 1) {
+        const rapporto = nuovoNumero / ArrayNumeriCasuali[ArrayNumeriCasuali.length - 2];
+        ArrayRapporti.push(rapporto);
+      } else {
+        ArrayRapporti.push(0);
+      }
+
+      // distanza dalla media
+      const distanza = Math.abs(nuovoNumero - mediaRange);
+      ArrayDistanze.push(distanza);
+
+      // aggiorna grafico
+      chart.data.labels.push(counter++);
+      chart.data.datasets[0].data.push(nuovoNumero);
+      chart.data.datasets[1].data.push(distanza);
+      chart.data.datasets[2].data.push(ArrayRapporti[ArrayRapporti.length - 1]);
+      chart.update();
+
+    }, 500);
+  </script>
+</body>
+</html>
