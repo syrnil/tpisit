@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Tempo di Reazione con Classifica</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #333;
+      color: white;
+      text-align: center;
+    }
+    #gameArea {
+      width: 100vw;
+      height: 100vh;
+      background-color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      font-size: 2rem;
+    }
+    #leaderboard {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #leaderboard ul {
+      list-style: none;
+      padding: 0;
+    }
+    #leaderboard li {
+      margin: 10px;
+      font-size: 1.2rem;
+    }
+    #leaderboard button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #leaderboard button:hover {
+      background-color: #666;
+    }
+    #showLeaderboardBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    #showLeaderboardBtn:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<div id="gameArea">Clicca per iniziare</div>
+<button id="showLeaderboardBtn" onclick="toggleLeaderboard()">Classifica</button>
+<div id="leaderboard">
+  <h2>Classifica</h2>
+  <ul id="scoreList"></ul>
+  <button onclick="toggleLeaderboard()">Chiudi</button>
+</div>
+
+<script>
+  const gameArea = document.getElementById("gameArea");
+  const leaderboard = document.getElementById("leaderboard");
+  const scoreList = document.getElementById("scoreList");
+  const showLeaderboardBtn = document.getElementById("showLeaderboardBtn");
+
+  let waiting = false;
+  let startTime;
+  let timeout;
+  let playerName = prompt("Inserisci il tuo nome:");
+
+  gameArea.addEventListener("click", () => {
+    if (!waiting) {
+      gameArea.textContent = "Aspetta...";
+      gameArea.style.backgroundColor = "#aa3333";
+      waiting = true;
+
+      const delay = Math.random() * 2000 + 1000; // 1 - 3 secondi
+      timeout = setTimeout(() => {
+        gameArea.textContent = "CLICCA ORA!";
+        gameArea.style.backgroundColor = "#33aa33";
+        startTime = Date.now();
+        waiting = "ready";
+      }, delay);
+
+    } else if (waiting === "ready") {
+      const reactionTime = Date.now() - startTime;
+      gameArea.textContent = `Tempo di reazione: ${reactionTime} ms. Clicca per riprovare.`;
+      gameArea.style.backgroundColor = "#444";
+      waiting = false;
+      saveScore(reactionTime);
+    } else {
+      clearTimeout(timeout);
+      gameArea.textContent = "Troppo presto! Riprova.";
+      gameArea.style.backgroundColor = "#444";
+      waiting = false;
+    }
+  });
+
+  function saveScore(time) {
+    const scores = JSON.parse(localStorage.getItem("scores")) || [];
+    scores.push({ name: playerName, time });
+    scores.sort((a, b) => a.time - b.time);
+    localStorage.setItem("scores", JSON.stringify(scores.slice(0, 5))); // Mantiene solo i primi 5
+    updateLeaderboard();
+  }
+
+  function updateLeaderboard() {
+    const scores = JSON.parse(localStorage.getItem("scores")) || [];
+    scoreList.innerHTML = "";
+    scores.forEach(score => {
+      const li = document.createElement("li");
+      li.textContent = `${score.name}: ${score.time} ms`;
+      scoreList.appendChild(li);
+    });
+  }
+
+  function toggleLeaderboard() {
+    leaderboard.style.display = leaderboard.style.display === "flex" ? "none" : "flex";
+  }
+
+  // Mostra la classifica all'avvio
+  updateLeaderboard();
+</script>
+
+</body>
+</html>
